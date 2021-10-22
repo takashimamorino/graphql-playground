@@ -2,14 +2,11 @@
 	"name": "graphql-playground",
 	"version": "0.0.1",
 	"description": "play with graphql",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/takashimamorino/graphql-playground.git"
-	},
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/takashimamorino/graphql-playground/issues"
-	},
-	"homepage": "https://github.com/takashimamorino/graphql-playground#readme"
+	"workspaces": [
+		"packages/*"
+	],
+	"devDependencies": {
+		"prettier": "2.4.1",
+		"typescript": "^4.4.4"
+	}
 }
