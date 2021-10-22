@@ -5,12 +5,16 @@
     "dev": "ts-node-dev --respawn src/index.ts",
     "build": "tsc",
     "start": "node build/src/index.js",
-    "tsc": "tsc --noEmit"
+    "tsc": "tsc --noEmit",
+    "generate:gql": "graphql-codegen"
   },
   "dependencies": {
+    "@graphql-tools/load-files": "^6.5.1",
+    "@graphql-tools/merge": "^8.2.0",
     "apollo-server": "^3.4.0"
   },
   "devDependencies": {
+    "@graphql-codegen/typescript-resolvers": "^2.3.2",
     "ts-node": "^10.3.1",
     "ts-node-dev": "^1.1.8"
   }
