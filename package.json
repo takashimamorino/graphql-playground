@@ -1,12 +1,21 @@
 {
-	"name": "graphql-playground",
-	"version": "0.0.1",
-	"description": "play with graphql",
-	"workspaces": [
-		"packages/*"
-	],
-	"devDependencies": {
-		"prettier": "2.4.1",
-		"typescript": "^4.4.4"
-	}
+  "name": "graphql-playground",
+  "version": "0.0.1",
+  "description": "play with graphql",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "prettier": "prettier --write .",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
+  "devDependencies": {
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.3",
+    "prettier": "2.4.1",
+    "typescript": "^4.4.4"
+  }
 }
