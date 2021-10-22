@@ -6,6 +6,8 @@
     "packages/*"
   ],
   "scripts": {
+    "dev": "npm run dev --workspaces",
+    "tsc": "npm run tsc --workspaces",
     "prettier": "prettier --write .",
     "prepare": "husky install"
   },
@@ -17,5 +19,8 @@
     "lint-staged": "^11.2.3",
     "prettier": "2.4.1",
     "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "graphql": "^15.6.1"
   }
 }
