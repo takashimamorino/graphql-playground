@@ -1,7 +1,13 @@
 import { NextPage } from 'next';
+import { Books } from '../components/Books';
 
 export const IndexPage: NextPage = () => {
-  return <h1>Index Page</h1>;
+  return (
+    <>
+      <h1>Books</h1>
+      <Books />
+    </>
+  );
 };
 
 export default IndexPage;
