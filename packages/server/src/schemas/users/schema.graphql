@@ -1,0 +1,11 @@
+type User {
+  id: ID!
+  name: String!
+  email: EmailAddress!
+  birthDate: DateTime!
+  homePage: URL
+}
+
+scalar EmailAddress
+scalar DateTime
+scalar URL

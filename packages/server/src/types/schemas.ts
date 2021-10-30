@@ -1,4 +1,8 @@
-import { GraphQLResolveInfo } from 'graphql';
+import {
+  GraphQLResolveInfo,
+  GraphQLScalarType,
+  GraphQLScalarTypeConfig,
+} from 'graphql';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K];
@@ -16,6 +20,9 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  DateTime: unknown;
+  EmailAddress: string;
+  URL: unknown;
 };
 
 export type Book = {
@@ -28,6 +35,16 @@ export type Book = {
 export type Query = {
   __typename?: 'Query';
   books?: Maybe<Array<Maybe<Book>>>;
+  users: Array<Maybe<User>>;
+};
+
+export type User = {
+  __typename?: 'User';
+  birthDate: Scalars['DateTime'];
+  email: Scalars['EmailAddress'];
+  homePage?: Maybe<Scalars['URL']>;
+  id: Scalars['ID'];
+  name: Scalars['String'];
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -139,18 +156,26 @@ export type DirectiveResolverFn<
 export type ResolversTypes = {
   Book: ResolverTypeWrapper<Book>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
+  EmailAddress: ResolverTypeWrapper<Scalars['EmailAddress']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  URL: ResolverTypeWrapper<Scalars['URL']>;
+  User: ResolverTypeWrapper<User>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Book: Book;
   Boolean: Scalars['Boolean'];
+  DateTime: Scalars['DateTime'];
+  EmailAddress: Scalars['EmailAddress'];
   ID: Scalars['ID'];
   Query: {};
   String: Scalars['String'];
+  URL: Scalars['URL'];
+  User: User;
 };
 
 export type BookResolvers<
@@ -163,6 +188,16 @@ export type BookResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export interface DateTimeScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
+  name: 'DateTime';
+}
+
+export interface EmailAddressScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes['EmailAddress'], any> {
+  name: 'EmailAddress';
+}
+
 export type QueryResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
@@ -172,9 +207,35 @@ export type QueryResolvers<
     ParentType,
     ContextType
   >;
+  users?: Resolver<
+    Array<Maybe<ResolversTypes['User']>>,
+    ParentType,
+    ContextType
+  >;
+};
+
+export interface UrlScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes['URL'], any> {
+  name: 'URL';
+}
+
+export type UserResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']
+> = {
+  birthDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  email?: Resolver<ResolversTypes['EmailAddress'], ParentType, ContextType>;
+  homePage?: Resolver<Maybe<ResolversTypes['URL']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
   Book?: BookResolvers<ContextType>;
+  DateTime?: GraphQLScalarType;
+  EmailAddress?: GraphQLScalarType;
   Query?: QueryResolvers<ContextType>;
+  URL?: GraphQLScalarType;
+  User?: UserResolvers<ContextType>;
 };
