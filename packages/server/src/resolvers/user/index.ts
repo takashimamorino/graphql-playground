@@ -3,9 +3,25 @@ import { EmailAddressMock, DateTimeMock, URLMock } from 'graphql-scalars';
 
 const Query: QueryResolvers = {
   users: () => users,
+  user: (_, args) => {
+    const user = users.find((u) => u.id === args.id);
+
+    if (typeof user === 'undefined') {
+      throw new Error();
+    }
+
+    return {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      birthDate: user.birthDate,
+      homePage: user.homePage,
+      books: user.books,
+    };
+  },
 };
 
-export const userResolver = { Query };
+export const userResolver = { Query, Node };
 
 const users: User[] = [
   {
@@ -14,6 +30,7 @@ const users: User[] = [
     email: `01-${EmailAddressMock()}`,
     birthDate: DateTimeMock(),
     homePage: URLMock(),
+    books: [],
   },
   {
     id: 'user_02',
@@ -21,5 +38,6 @@ const users: User[] = [
     email: `02-${EmailAddressMock()}`,
     birthDate: DateTimeMock(),
     homePage: URLMock(),
+    books: [],
   },
 ];

@@ -13,6 +13,9 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
   [SubKey in K]: Maybe<T[SubKey]>;
 };
+export type RequireFields<T, K extends keyof T> = {
+  [X in Exclude<keyof T, K>]?: T[X];
+} & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -35,12 +38,18 @@ export type Book = {
 export type Query = {
   __typename?: 'Query';
   books?: Maybe<Array<Maybe<Book>>>;
+  user: User;
   users: Array<Maybe<User>>;
+};
+
+export type QueryUserArgs = {
+  id: Scalars['ID'];
 };
 
 export type User = {
   __typename?: 'User';
   birthDate: Scalars['DateTime'];
+  books: Array<Maybe<Book>>;
   email: Scalars['EmailAddress'];
   homePage?: Maybe<Scalars['URL']>;
   id: Scalars['ID'];
@@ -207,6 +216,12 @@ export type QueryResolvers<
     ParentType,
     ContextType
   >;
+  user?: Resolver<
+    ResolversTypes['User'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryUserArgs, 'id'>
+  >;
   users?: Resolver<
     Array<Maybe<ResolversTypes['User']>>,
     ParentType,
@@ -224,6 +239,11 @@ export type UserResolvers<
   ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']
 > = {
   birthDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  books?: Resolver<
+    Array<Maybe<ResolversTypes['Book']>>,
+    ParentType,
+    ContextType
+  >;
   email?: Resolver<ResolversTypes['EmailAddress'], ParentType, ContextType>;
   homePage?: Resolver<Maybe<ResolversTypes['URL']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;

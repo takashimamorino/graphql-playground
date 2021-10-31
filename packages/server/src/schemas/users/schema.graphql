@@ -4,8 +4,5 @@ type User {
   email: EmailAddress!
   birthDate: DateTime!
   homePage: URL
+  books: [Book]!
 }
-
-scalar EmailAddress
-scalar DateTime
-scalar URL
