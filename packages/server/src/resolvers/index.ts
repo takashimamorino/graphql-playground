@@ -4,13 +4,13 @@ import { bookResolver } from './book';
 import { userResolver } from './user';
 import { GraphQLDID } from '../scalars';
 
-const customScalats = {
+const customScalars = {
   DID: GraphQLDID,
 };
 
 export const resolvers = mergeResolvers([
   scalarResolvers,
-  customScalats,
+  customScalars,
   bookResolver,
   userResolver,
 ]);
