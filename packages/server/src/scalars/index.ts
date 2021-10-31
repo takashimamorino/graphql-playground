@@ -1,0 +1,1 @@
+export { GraphQLDID } from './DID';

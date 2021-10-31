@@ -12,6 +12,7 @@ const Query: QueryResolvers = {
 
     return {
       id: user.id,
+      did: user.did,
       name: user.name,
       email: user.email,
       birthDate: user.birthDate,
@@ -21,11 +22,12 @@ const Query: QueryResolvers = {
   },
 };
 
-export const userResolver = { Query, Node };
+export const userResolver = { Query };
 
 const users: User[] = [
   {
     id: 'user_01',
+    did: 'did:foo:bar',
     name: 'name_01',
     email: `01-${EmailAddressMock()}`,
     birthDate: DateTimeMock(),
@@ -34,6 +36,7 @@ const users: User[] = [
   },
   {
     id: 'user_02',
+    did: 'did:foo:hoge02',
     name: 'name_02',
     email: `02-${EmailAddressMock()}`,
     birthDate: DateTimeMock(),

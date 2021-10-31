@@ -23,6 +23,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  DID: unknown;
   DateTime: unknown;
   EmailAddress: string;
   URL: unknown;
@@ -50,6 +51,7 @@ export type User = {
   __typename?: 'User';
   birthDate: Scalars['DateTime'];
   books: Array<Maybe<Book>>;
+  did: Scalars['DID'];
   email: Scalars['EmailAddress'];
   homePage?: Maybe<Scalars['URL']>;
   id: Scalars['ID'];
@@ -165,6 +167,7 @@ export type DirectiveResolverFn<
 export type ResolversTypes = {
   Book: ResolverTypeWrapper<Book>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  DID: ResolverTypeWrapper<Scalars['DID']>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   EmailAddress: ResolverTypeWrapper<Scalars['EmailAddress']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
@@ -178,6 +181,7 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Book: Book;
   Boolean: Scalars['Boolean'];
+  DID: Scalars['DID'];
   DateTime: Scalars['DateTime'];
   EmailAddress: Scalars['EmailAddress'];
   ID: Scalars['ID'];
@@ -196,6 +200,11 @@ export type BookResolvers<
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
+
+export interface DidScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes['DID'], any> {
+  name: 'DID';
+}
 
 export interface DateTimeScalarConfig
   extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
@@ -244,6 +253,7 @@ export type UserResolvers<
     ParentType,
     ContextType
   >;
+  did?: Resolver<ResolversTypes['DID'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['EmailAddress'], ParentType, ContextType>;
   homePage?: Resolver<Maybe<ResolversTypes['URL']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -253,6 +263,7 @@ export type UserResolvers<
 
 export type Resolvers<ContextType = any> = {
   Book?: BookResolvers<ContextType>;
+  DID?: GraphQLScalarType;
   DateTime?: GraphQLScalarType;
   EmailAddress?: GraphQLScalarType;
   Query?: QueryResolvers<ContextType>;
