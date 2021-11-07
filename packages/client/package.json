@@ -10,7 +10,7 @@
     "generate:gql": "graphql-codegen"
   },
   "dependencies": {
-    "@apollo/client": "^3.4.16",
+    "@apollo/client": "3.4.16",
     "@graphql-codegen/near-operation-file-preset": "2.1.6",
     "@graphql-codegen/typed-document-node": "2.1.6",
     "@graphql-codegen/typescript-operations": "2.1.8",
