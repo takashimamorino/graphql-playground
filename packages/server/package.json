@@ -15,7 +15,7 @@
     "graphql-scalars": "1.13.6"
   },
   "devDependencies": {
-    "@graphql-codegen/typescript-resolvers": "2.4.1",
+    "@graphql-codegen/typescript-resolvers": "2.4.2",
     "did-graphql-scalars": "0.0.2",
     "ts-node": "10.4.0",
     "ts-node-dev": "1.1.8"
