@@ -9,3 +9,8 @@ generates:
       defaultScalarType: unknown
       scalars:
         EmailAddress: string
+  introspection.json:
+    plugins:
+      - introspection
+    config:
+      minify: true
