@@ -34,7 +34,6 @@ export type Book = {
   __typename?: 'Book';
   author: Scalars['String'];
   id: Scalars['ID'];
-  title: Scalars['String'];
 };
 
 export type Query = {
@@ -198,7 +197,6 @@ export type BookResolvers<
 > = {
   author?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
