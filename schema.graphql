@@ -1,4 +1,0 @@
-type Foo {
-  id: ID!
-  name: String!
-}

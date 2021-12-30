@@ -13,4 +13,4 @@ jobs:
 
       - uses: kamilkisiela/graphql-inspector@master
         with:
-          schema: 'main:packages/server/src/schemas/books/schema.graphql'
+          schema: 'main:packages/server/src/schemas/**/*.graphql'
