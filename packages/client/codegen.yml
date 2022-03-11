@@ -1,14 +1,7 @@
 schema: ../server/src/schemas/**/*.graphql
-documents: './**/*.graphql'
+documents: 'src/**/*.tsx'
 generates:
-  src/types/graphql.tsx:
-    plugins:
-      - typescript
-  ./:
-    preset: near-operation-file
+  src/gql/:
+    preset: gql-tag-operations-preset
     presetConfig:
-      extension: .ts
-      baseTypesPath: src/types/graphql
-    plugins:
-      - typescript-operations
-      - typed-document-node
+      fragmentMasking: true
