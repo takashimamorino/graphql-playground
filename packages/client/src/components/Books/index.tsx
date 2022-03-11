@@ -1,12 +1,12 @@
-import { useQuery, gql } from '@apollo/client';
 import { VFC } from 'react';
+import { useQuery } from '@apollo/client';
+import { useFragment, FragmentType, gql } from '../../gql';
 
 const BooksQuery = gql(/* GraphQL */ `
   query BooksQuery {
     books {
       id
-      title
-      author
+      ...BookFragment
     }
   }
 `);
@@ -26,11 +26,31 @@ export const Books: VFC = () => {
     <ul>
       {data.books.map((book) => (
         <li key={book.id}>
-          <p>{book.id}</p>
-          <p>{book.title}</p>
-          <p>{book.author}</p>
+          <Book book={book} />
         </li>
       ))}
     </ul>
+  );
+};
+
+const BookFragment = gql(/* GraphQL */ `
+  fragment BookFragment on Book {
+    title
+    author
+  }
+`);
+
+type Props = {
+  book: FragmentType<typeof BookFragment>;
+};
+
+export const Book: VFC<Props> = (props) => {
+  const book = useFragment(BookFragment, props.book);
+
+  return (
+    <>
+      <p>{book.title}</p>
+      <p>{book.author}</p>
+    </>
   );
 };

@@ -57,14 +57,40 @@ export type BooksQueryQueryVariables = Exact<{ [key: string]: never }>;
 
 export type BooksQueryQuery = {
   __typename?: 'Query';
-  books?: Array<{
-    __typename?: 'Book';
-    id: string;
-    title: string;
-    author: string;
-  } | null> | null;
+  books?: Array<
+    | ({ __typename?: 'Book'; id: string } & {
+        ' $fragmentRefs': { BookFragmentFragment: BookFragmentFragment };
+      })
+    | null
+  > | null;
 };
 
+export type BookFragmentFragment = {
+  __typename?: 'Book';
+  title: string;
+  author: string;
+} & { ' $fragmentName': 'BookFragmentFragment' };
+
+export const BookFragmentFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'BookFragment' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'Book' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'author' } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<BookFragmentFragment, unknown>;
 export const BooksQueryDocument = {
   kind: 'Document',
   definitions: [
@@ -82,13 +108,16 @@ export const BooksQueryDocument = {
               kind: 'SelectionSet',
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'author' } },
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'BookFragment' },
+                },
               ],
             },
           },
         ],
       },
     },
+    ...BookFragmentFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<BooksQueryQuery, BooksQueryQueryVariables>;

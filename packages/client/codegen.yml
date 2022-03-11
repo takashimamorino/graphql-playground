@@ -4,4 +4,4 @@ generates:
   src/gql/:
     preset: gql-tag-operations-preset
     presetConfig:
-      augmentedModuleName: '@apollo/client'
+      fragmentMasking: true
