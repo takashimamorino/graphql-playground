@@ -1,10 +1,19 @@
-import { useQuery } from '@apollo/client';
+import { useQuery, gql } from '@apollo/client';
 import { VFC } from 'react';
-import { BooksDocument } from './books';
+
+const BooksQuery = gql(/* GraphQL */ `
+  query BooksQuery {
+    books {
+      id
+      title
+      author
+    }
+  }
+`);
 
 export const Books: VFC = () => {
-  const { data, loading, error } = useQuery(BooksDocument);
-  console.log({ data });
+  const { data, loading, error } = useQuery(BooksQuery);
+
   if (loading) {
     return <p>loading...</p>;
   }
