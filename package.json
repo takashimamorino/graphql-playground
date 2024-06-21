@@ -24,6 +24,6 @@
     "typescript": "4.5.4"
   },
   "dependencies": {
-    "graphql": "16.2.0"
+    "graphql": "16.9.0"
   }
 }
